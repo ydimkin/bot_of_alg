@@ -2,3 +2,4 @@ bot.db
 .env
 .venv
 .idea
+__pycache__
