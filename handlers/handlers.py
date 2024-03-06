@@ -93,8 +93,8 @@ async def select_data_callback(callback: CallbackQuery, state: FSMContext):
         name = "javascript"
         await state.set_state(StateMenu.javascript)
     elif callback.data == "C++":
-        name = "c++"
-        await state.set_state(StateMenu.c_plus_plus)
+        name = "c"
+        await state.set_state(StateMenu.c)
     return await select_data_bd(callback, name)
 
 
@@ -111,7 +111,7 @@ async def select_data(callback: CallbackQuery, state: FSMContext):
     elif proverka[0] in javascript_al:
         name = "javascript"
     elif proverka[0] in c_plus_plus_al:
-        name = "c++"
+        name = "c"
     return await select_data_bd(callback, name)
 
 
@@ -132,7 +132,6 @@ async def select_data_bd(callback: CallbackQuery, name):
             select = f"SELECT caption FROM text WHERE name=='{name}'"
             async with db.execute(select) as cursor:
                 result = await cursor.fetchone()
-                print(result[0])
                 return result[0]
     except aiosqlite.Error:
         await callback.answer(text="Не могу подключиться к базе данных")

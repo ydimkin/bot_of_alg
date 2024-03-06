@@ -43,11 +43,11 @@ java_al = (
 )
 
 c_plus_plus_al = (
-    "c++_quick_sort",
-    "c++_binary_search",
-    "c++_bubble_sort",
-    "c++_dijkstra",
-    "c++_DFS"
+    "c_quick_sort",
+    "c_binary_search",
+    "c_bubble_sort",
+    "c_dijkstra",
+    "c_DFS"
 )
 
 javascript_al = (

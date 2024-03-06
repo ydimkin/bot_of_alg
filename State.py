@@ -6,4 +6,4 @@ class StateMenu(StatesGroup):
     rust = State()
     javascript = State()
     java = State()
-    c_plus_plus = State()
+    c = State()
