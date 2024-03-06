@@ -1,7 +1,8 @@
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-
+import aiosqlite
 
 class Keyboard(object):
+
     _key_menu_lang = [
         [
             InlineKeyboardButton(text='Python', callback_data="Python"),
@@ -14,6 +15,8 @@ class Keyboard(object):
         ],
         [
             InlineKeyboardButton(text='Java', callback_data="Java"),
+        ],
+        [
             InlineKeyboardButton(text="Редактировать", callback_data="edit")
         ]
     ]
@@ -28,10 +31,12 @@ class Keyboard(object):
         ],
         [
             InlineKeyboardButton(text="Поиск в глубину", callback_data="DFS"),
-            InlineKeyboardButton(text="Редактировать", callback_data="edit")
         ],
         [
-            InlineKeyboardButton(text="Назад ↩", callback_data="Назад")
+            InlineKeyboardButton(text="Назад ↩", callback_data="Назад"),
+        ],
+        [
+            InlineKeyboardButton(text="Редактировать", callback_data="edit")
         ]
     ]
     _key_menu_al1 = [
@@ -50,3 +55,12 @@ class Keyboard(object):
     @classmethod
     def get_keyboard_al(cls) -> InlineKeyboardMarkup:
         return InlineKeyboardMarkup(inline_keyboard=cls._key_menu_al)
+
+    # async def check_admin(self):
+    #     async with aiosqlite.connect("bot.db") as db:
+
+
+
+    @classmethod
+    def get_keyboard_al1(cls) -> InlineKeyboardMarkup:
+        return InlineKeyboardMarkup(inline_keyboard=cls._key_menu_al1)

@@ -9,6 +9,7 @@ class Settings(BaseSettings):
 
 config = Settings()
 
+
 language = (
     "Python",
     "Rust",
