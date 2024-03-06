@@ -46,7 +46,9 @@ async def back(callback: CallbackQuery, state: FSMContext):
 
 async def select_data(callback: CallbackQuery, state: FSMContext):
     name = ""
-    if callback.data == "Python":
+    proverka = await state.get_data()
+    await state.clear()
+    if callback.data == "Python" or proverka[0] in ["python_quick_sort"]:
         name = "python"
         await state.set_state(StateMenu.python)
     elif callback.data == "Rust":
@@ -63,8 +65,9 @@ async def select_data(callback: CallbackQuery, state: FSMContext):
         await state.set_state(StateMenu.c_plus_plus)
     else:
         print("Ошибка")
+
     try:
-        async with aiosqlite.connect("bot.db") as db:
+        async with aiosqlite.connect("../bot.db") as db:
             select = f"SELECT caption FROM text WHERE name=='{name}'"
             async with db.execute(select) as cursor:
                 result = await cursor.fetchone()
@@ -82,7 +85,7 @@ async def send_message(callback: CallbackQuery, state: FSMContext):
 
 
 async def text_for_al(name):
-    async with aiosqlite.connect("bot.db") as db:
+    async with aiosqlite.connect("../bot.db") as db:
         quick_sort_text = ""
         quick_sort_code = ""
         async with db.execute(f"Select caption, code FROM text WHERE name == '{name}'") as cursor:
@@ -95,9 +98,9 @@ async def text_for_al(name):
 @_router.callback_query(F.data == "quick_sort")
 async def quick_sort_al(callback: CallbackQuery, state: FSMContext):
     data = await state.get_state()
-    await state.set_data([data])
-    name = await state.get_data()
-    name = name[0].replace("StateMenu:", "") + "_" + callback.data
+    data = data.replace("StateMenu:", "")
+    name = data + "_" + callback.data
+    await state.set_data([name])
     text = await text_for_al(name)
     await callback.message.edit_text(text=text, reply_markup=Keyboard.get_keyboard_al())
     await callback.answer(show_alert=False)
