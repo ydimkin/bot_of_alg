@@ -7,3 +7,4 @@ class StateMenu(StatesGroup):
     javascript = State()
     java = State()
     c = State()
+    edit = State()
