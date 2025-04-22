@@ -65,3 +65,5 @@ alg = (
     "dijkstra",
     "DFS"
 )
+
+database = "bot.db"
